@@ -1,0 +1,33 @@
+#headline{
+    text-align: center;
+}
+#board {
+    margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(10, 30px);
+  gap: 30px;
+  justify-content: center;
+}
+
+.cell {
+  width: 50px;
+  height: 50px;
+  background:cornflowerblue;
+}
+
+.snake {
+  background: green;
+}
+.food {
+  background: red;
+}
+
+#hud {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  margin-left: 600px;
+}

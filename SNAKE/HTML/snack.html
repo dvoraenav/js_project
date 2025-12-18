@@ -1,18 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/SNAKE/CSS/snack.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake</title>
+  <link rel="stylesheet" href="/SNAKE/CSS/snack.css">
+  <link rel="stylesheet" href="/SNAKE/CSS/s_screen.css">
 </head>
 <body>
-    <h1 id="headline">Snake</h1>
-    <div id="hud">
-        <span id="score">Score: 0</span>
-        <span id="time">Time: 0</span>
+   <!-- START SCREEN -->
+<div id="startScreen">
+  <h1 class="title">Snake</h1>
+
+  <img src="/SNAKE/IMAGES/jeu-snake-classique.webp" alt="Snake" class="snake-img">
+
+  <button id="startBtn">PLAY</button>
+
+  <p class="subtitle">HYPER NOSTALGIC SNAKE</p>
+</div>
+
+  <h1 id="headline">Snake</h1>
+
+  <div id="hud">
+    <span id="score">Score: 0</span>
+    <span id="time">Time: 0</span>
+    <span id="highScoreDisplay">High score: 0</span>
+  </div>
+
+  <div id="board"></div>
+
+  <!-- GAME OVER SCREEN -->
+  <div id="gameOverScreen" class="hidden">
+    <div class="gameover-box">
+      <h1>GAME OVER</h1>
+
+      <p id="finalScore"></p>
+      <p id="highScoreFinal"></p>
+
+      <h3>Last Games</h3>
+      <ul id="scoreHistory"></ul>
+
+      <button type="button" id="playAgainBtn">Play Again</button>
+      <button type="button" id="resetStatsBtn">Reset Stats</button>
     </div>
-    <div id="board"></div>
-    <script src="/SNAKE/JS/snake.js"></script>
+  </div>
+
+  <script src="/SNAKE/JS/game.js"></script>
+<script src="/SNAKE/JS/storage.js"></script>
+<script src="/SNAKE/JS/ui.js"></script>
+<script src="/SNAKE/JS/main.js"></script>
 </body>
 </html>

@@ -1,33 +1,94 @@
-#headline{
-    text-align: center;
+
+#headline {
+  text-align: center;
 }
+
 #board {
-    margin-top: 50px;
+  margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(10, 30px);
-  grid-template-rows: repeat(10, 30px);
-  gap: 30px;
+  grid-template-columns: repeat(10, 50px);
+  grid-template-rows: repeat(10, 50px);
+  gap: 2px;
   justify-content: center;
 }
 
 .cell {
   width: 50px;
   height: 50px;
-  background:cornflowerblue;
+  background: cornflowerblue;
 }
 
 .snake {
   background: green;
 }
+
 .food {
   background: red;
 }
 
 #hud {
+  color: rgb(27, 33, 33);
   display: flex;
   justify-content: space-between;
-  width: 300px;
-  margin-bottom: 10px;
+  width: 400px;
+  margin: 0 auto 10px auto;
   font-weight: bold;
-  margin-left: 600px;
+}
+
+#gameOverScreen {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.gameover-box {
+  background: rgb(197, 202, 203);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.4);
+}
+
+.gameover-box h1 {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.gameover-box button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: aqua;
+}
+
+.gameover-box button:hover {
+  background-color: #00cccc;
+}
+#scoreHistory {
+  list-style: none;          /* בלי נקודות */
+  padding: 0;
+  margin: 10px 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+#scoreHistory li {
+  width: 120px;
+  padding: 6px 0;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
 }

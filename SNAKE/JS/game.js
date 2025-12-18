@@ -1,5 +1,4 @@
 
-
 const board = document.getElementById("board");
 const size = 10;
 let scoreEl=document.getElementById('score');
@@ -7,6 +6,7 @@ let timeEl=document.getElementById('time');
 let score=0;
 let time=0;
 let gameLoop;
+let onGameOver = null;
 
 for (let y = 0; y < size; y++) {
   for (let x = 0; x < size; x++) {
@@ -17,8 +17,10 @@ for (let y = 0; y < size; y++) {
     board.appendChild(cell);
   }
 }
-//snake
+//תצוגת לוח ראשוני
 resetGame();
+
+
 
 //לקלוט את החיצים במקלדת
 document.addEventListener("keydown",(event)=>{
@@ -37,18 +39,16 @@ document.addEventListener("keydown",(event)=>{
 
 });
 
-startGame();
 
-setInterval(() => {
-  timeEl.textContent="time:" + time;
-  time++;
-}, 1000);
-
-
-
+function startTimer() {
+  timeInterval = setInterval(() => {
+    time++;
+    timeEl.textContent = "time: " + time;
+  }, 1000);
+}
 
 
-//functions
+
 
 function draw() {
   // ניקוי
@@ -78,6 +78,11 @@ function draw() {
 
 
 function resetGame() {
+  score=0;
+  time=0;
+  scoreEl.textContent="score:" + score;
+  timeEl.textContent="time:" + time;
+
   snake = [
     { x: 4, y: 5 },
     { x: 3, y: 5 },
@@ -85,8 +90,6 @@ function resetGame() {
   ];
   direction = "RIGHT";
   food = createFood();
-  score=0;
-  scoreEl.textContent="score:" + score;
 
 }
 
@@ -130,27 +133,6 @@ if (newHead.x === food.x && newHead.y === food.y) {
 }
 
 }
-
-
-function startGame(){
-    
-    gameLoop = setInterval(() => {
-    moveSnake();
-    draw();
-    }, 300);
-}
-
-
-
-function gameOver(){
-     time=0;    
-    alert("Game Over");
-    clearInterval(gameLoop);
-    resetGame();
-    startGame(); 
-}
-
-
 function createFood() {
   return {
     x: Math.floor(Math.random() * size),
@@ -159,7 +141,21 @@ function createFood() {
 }
 
 
+function startGame(){
+    startTimer();
+    gameLoop = setInterval(() => {
+    moveSnake();
+    draw();
+    }, 200);
+   
+}
 
+function gameOver() {
+  clearInterval(gameLoop);
+  clearInterval(timeInterval);
 
-
-
+  // רק מודיע – לא מטפל
+  if (onGameOver) {
+    onGameOver(score);
+  }
+}

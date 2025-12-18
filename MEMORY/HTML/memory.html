@@ -1,1 +1,35 @@
- 
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>משחק הזיכרון האינטראקטיבי</title>
+    <link rel="stylesheet" href="/MEMORY/CSS/memory.css">
+</head>
+<body>
+
+    <div class="main-container">
+        <header>
+            <h1>משחק הזיכרון</h1>
+            
+            <div id="difficulty-levels">
+                <button class="btn" onclick="startGame(12, 4,event)">קל</button>
+                <button class="btn" onclick="startGame(18, 6,event)">בינוני</button>
+                <button class="btn" onclick="startGame(24, 8,event)">קשה</button>
+            </div>
+
+            <div id="game-info" class="hidden">
+                <div class="info-item">ניקוד: <span id="score">0</span></div>
+                <div class="info-item">זמן: <span id="timer">00:00</span></div>
+                <div class="info-item" id="best-score-container">שיא אישי: <span id="best-score">אין עדיין</span></div>
+            </div>
+        </header>
+
+        <div id="success-message" class="hidden">כל הכבוד!! 🎉</div>
+
+        <div id="game-board"></div>
+    </div>
+
+    <script src="/MEMORY/JS/memory.js"></script>
+</body>
+</html>

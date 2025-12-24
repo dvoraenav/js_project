@@ -1,8 +1,14 @@
-
+/* =========================
+   כותרת ראשית
+   ========================= */
 #headline {
   text-align: center;
 }
 
+
+/* =========================
+   לוח המשחק (Grid)
+   ========================= */
 #board {
   margin-top: 50px;
   display: grid;
@@ -11,7 +17,9 @@
   gap: 2px;
   justify-content: center;
 }
-
+/* =========================
+   תא בסיסי בלוח
+   ========================= */
 .cell {
   width: 50px;
   height: 50px;
@@ -25,7 +33,9 @@
 .food {
   background: red;
 }
-
+/* =========================
+   HUD – ניקוד, זמן, שיא
+   ========================= */
 #hud {
   color: rgb(27, 33, 33);
   display: flex;
@@ -34,7 +44,9 @@
   margin: 0 auto 10px auto;
   font-weight: bold;
 }
-
+/* =========================
+   מסך Game Over (Overlay)
+   ========================= */
 #gameOverScreen {
   position: fixed;
   inset: 0;
@@ -45,10 +57,14 @@
   z-index: 9999;
 }
 
+/* מחלקה להסתרת אלמנטים */
 .hidden {
   display: none !important;
 }
 
+/* =========================
+   חלון Game Over
+   ========================= */
 .gameover-box {
   background: rgb(197, 202, 203);
   padding: 30px;
@@ -74,15 +90,20 @@
 .gameover-box button:hover {
   background-color: #00cccc;
 }
+
+/* =========================
+   רשימת היסטוריית ניקוד
+   ========================= */
 #scoreHistory {
-  list-style: none;          /* בלי נקודות */
+  list-style: none;          
   padding: 0;
   margin: 10px 0 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column;/* פריטים אחד מתחת לשני */
   gap: 6px;
   align-items: center;
 }
+/* פריט בודד בהיסטוריה */
 #scoreHistory li {
   width: 120px;
   padding: 6px 0;

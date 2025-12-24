@@ -1,4 +1,4 @@
-
+// אלמנט הלוח
 const board = document.getElementById("board");
 const size = 10;
 let scoreEl=document.getElementById('score');
@@ -6,7 +6,10 @@ let timeEl=document.getElementById('time');
 let score=0;
 let time=0;
 let gameLoop;
+let timeInterval;
 let onGameOver = null;
+
+// יצירת לוח המשחק (div לכל תא)
 
 for (let y = 0; y < size; y++) {
   for (let x = 0; x < size; x++) {
@@ -39,7 +42,7 @@ document.addEventListener("keydown",(event)=>{
 
 });
 
-
+// מפעיל טיימר שמעדכן זמן כל שנייה
 function startTimer() {
   timeInterval = setInterval(() => {
     time++;
@@ -49,9 +52,9 @@ function startTimer() {
 
 
 
-
+// מצייר את הנחש והאוכל על הלוח
 function draw() {
-  // ניקוי
+  // ניקוי כל התאים
   document.querySelectorAll(".cell").forEach(cell => {
     cell.classList.remove("snake", "food");
   });
@@ -76,7 +79,7 @@ function draw() {
         }   
 }
 
-
+// מאפס את מצב המשחק (נחש, אוכל, ניקוד, זמן)
 function resetGame() {
   score=0;
   time=0;
@@ -92,21 +95,23 @@ function resetGame() {
   food = createFood();
 
 }
-
+// מזיז את הנחש צעד אחד קדימה
 function moveSnake() {
   const head = snake[0];
   let newHead = { ...head };
 
+  // חישוב מיקום הראש החדש
   if (direction === "RIGHT") newHead.x++;
   if (direction === "LEFT")  newHead.x--;
   if (direction === "UP")    newHead.y--;
   if (direction === "DOWN")  newHead.y++;
 
+    // בדיקה אם הנחש פוגע בעצמו
   const hitSelf = snake.some(part =>
   part.x === newHead.x && part.y === newHead.y
 );
 
-  //  בדיקת גבולות
+  // // בדיקת יציאה מהלוח או פגיעה בעצמו
   if (
     newHead.x < 0 ||
     newHead.x >= size ||
@@ -120,7 +125,7 @@ function moveSnake() {
   
   snake.unshift(newHead); // ראש חדש
 
-
+  // בדיקה אם אכלנו אוכל
 if (newHead.x === food.x && newHead.y === food.y) {
   // אכלנו → לא מורידים זנב
   food=createFood();//מגרילים אוכל חדש
@@ -132,6 +137,7 @@ if (newHead.x === food.x && newHead.y === food.y) {
   snake.pop();//אם לא אכלנו אז מורידים את הזנב כי לא צריך לגדול
 }
 
+// מגריל מיקום אקראי לאוכל
 }
 function createFood() {
   return {
@@ -140,7 +146,7 @@ function createFood() {
   };
 }
 
-
+// מפעיל את המשחק
 function startGame(){
     startTimer();
     gameLoop = setInterval(() => {
@@ -150,6 +156,8 @@ function startGame(){
    
 }
 
+// סיום משחק
+// הלוגיקה רק מודיעה – לא מטפלת ב־UI או LocalStorage
 function gameOver() {
   clearInterval(gameLoop);
   clearInterval(timeInterval);

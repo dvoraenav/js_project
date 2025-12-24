@@ -1,53 +1,40 @@
-let flippedCards = [];
-let timerInterval;
-let secondsElapsed = 0;
+let flippedCards = []; //cards currently flipped
+let timerInterval; // timer interval
+let secondsElapsed = 0; // time elapsed in seconds
 
-function startGame(numCards, columns, event) {
-    // הסתרת מסך הפתיחה
-    document.getElementById('startScreen').classList.add('hidden-screen');
+function startGame(numCards, columns) {
     
-    const board = document.getElementById('game-board');
-    const gameInfo = document.getElementById('game-info');
-    gameInfo.classList.remove('hidden'); 
-
-    // 1. ניהול נראות הכפתורים
-    const allButtons = document.querySelectorAll('.btn');
-    allButtons.forEach(btn => btn.classList.remove('active'));
-    if (event) {
-        event.currentTarget.classList.add('active');
-    }
-
-    // איפוס טיימר
-    clearInterval(timerInterval); 
-    secondsElapsed = 0;
-    document.getElementById('timer').innerText = "00:00";
+    document.getElementById('startScreen').classList.add('hidden-screen'); //hide start screen (add hidden to start screen)
     
-    // הפעלת טיימר חדש
-    startTimer();
+    const board = document.getElementById('game-board'); //from memory.html
+    const gameInfo = document.getElementById('game-info'); //from memory.html
 
-    // 2. איפוס הלוח והמשתנים
-    board.innerHTML = ''; 
-    flippedCards = []; 
+    clearInterval(timerInterval);  //stop previous timer if any
+    secondsElapsed = 0; // reset time
+    document.getElementById('timer').innerText = "00:00"; //write 00:00 to timer display
+    
+    startTimer(); // start new timer
 
-    // משיכת השיאים מהזיכרון
-    const bestTimes = JSON.parse(localStorage.getItem('memoryGameScores')) || {};
-    const bestScoreElement = document.getElementById('best-score');
+    board.innerHTML = '';  //clear previous board
+    flippedCards = []; // reset flipped cards
 
-    // בדיקה אם קיים שיא לרמה הנוכחית
-    if (bestTimes[numCards]) {
+    const bestTimes = JSON.parse(localStorage.getItem('memoryGameScores')) || {}; //translate from local storage Json to string
+    const bestScoreElement = document.getElementById('best-score'); //from memory.html
+
+    if (bestTimes[numCards]) { // if there is a best time for this level
         const bMins = Math.floor(bestTimes[numCards] / 60);
         const bSecs = bestTimes[numCards] % 60;
-        const timeDisplay = bMins > 0 ? `${bMins}:${bSecs.toString().padStart(2, '0')}` : `${bSecs} שניות`;
-        bestScoreElement.innerText = timeDisplay;
+        const timeDisplay = bMins > 0 ? `${bMins}:${bSecs.toString().padStart(2, '0')}` : `${bSecs} שניות`; // format time display,
+        // padStart(2, '0') for adding zero if there just one number
+        bestScoreElement.innerText = timeDisplay; // display best time in the best score element
     } else {
-        bestScoreElement.innerText = "--:--";
+        bestScoreElement.innerText = "--:--"; // no best time yet
     }
 
-    // 3. הגדרת מבנה הלוח
-    board.style.gridTemplateColumns = `repeat(${columns}, 80px)`;
+    board.style.gridTemplateColumns = `repeat(${columns}, 80px)`; //calling to grid-template-columns in memory.css 
+    //to set number of columns, reapet it the number of the columns, 80px width each
 
-    // 4. מאגר תמונות
-    const animalImages = [
+    const animalImages = [ //array of animal images
         '/IMG/animal1.png', '/IMG/animal2.png', '/IMG/animal3.png', '/IMG/animal4.png',
         '/IMG/animal5.png', '/IMG/animal6.png', '/IMG/animal7.png', '/IMG/animal8.png',
         '/IMG/animal9.png', '/IMG/animal10.png', '/IMG/animal11.png', '/IMG/animal12.png',
@@ -56,15 +43,14 @@ function startGame(numCards, columns, event) {
         '/IMG/animal21.png', '/IMG/animal22.png', '/IMG/animal23.png', '/IMG/animal24.png'    
     ];
 
-    const selectedImages = animalImages.slice(0, numCards / 2);
-    let gameValues = [...selectedImages, ...selectedImages];
-    gameValues.sort(() => Math.random() - 0.5);
+    const selectedImages = animalImages.slice(0, numCards / 2); //select half the number of images from the array.each image appears twice
+    let gameValues = [...selectedImages, ...selectedImages]; //create pairs by duplicating the selected images
+    gameValues.sort(() => Math.random() - 0.5); //shuffle the array randomly
 
-    // 5. יצירת הקלפים
     gameValues.forEach(imgUrl => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.dataset.value = imgUrl; 
+        const card = document.createElement('div'); //create a div for each card
+        card.classList.add('card'); //add class card to the div
+        card.dataset.value = imgUrl; //set value to the image URL for matching
     
         card.innerHTML = `
             <div class="card-inner">
@@ -73,43 +59,43 @@ function startGame(numCards, columns, event) {
                     <img src="${imgUrl}" alt="animal" class="card-img">
                 </div>
             </div>
-        `;
+        `; //card structure with front and back sides
     
-        card.addEventListener('click', onCardClick);
-        board.appendChild(card);
+        card.addEventListener('click', onCardClick); 
+        board.appendChild(card); //add card to the game board
     });
 }
 
 function onCardClick(e) {
-    const clickedCard = e.currentTarget;
-    if (clickedCard.classList.contains('flipped') || flippedCards.length === 2) return;
+    const clickedCard = e.currentTarget; //the element that was clicked
+    if (clickedCard.classList.contains('flipped') || flippedCards.length === 2) return; 
+        //ignore if already flipped or two cards are already flipped
 
-    clickedCard.classList.add('flipped');
-    flippedCards.push(clickedCard);
+    clickedCard.classList.add('flipped'); 
+    flippedCards.push(clickedCard); //add the clicked card to the flipped cards array
 
     if (flippedCards.length === 2) {
-        setTimeout(checkMatch, 200);
+        setTimeout(checkMatch, 200); //check for match after a short delay to allow user to see the second card
     }
+    //if its worng, it will flip back in checkMatch function 
 }
 
 function checkMatch() {
-    const [card1, card2] = flippedCards;
+    const [card1, card2] = flippedCards; 
 
-    if (card1.dataset.value === card2.dataset.value) {
-        card1.classList.add('match-anim');
-        card2.classList.add('match-anim');
-        flippedCards = [];
+    if (card1.dataset.value === card2.dataset.value) { //if the data values match
+        card1.classList.add('match-anim'); //we found a match, add match animation class
+        card2.classList.add('match-anim'); //here to
+        flippedCards = []; //reset flipped cards array
 
-        const totalMatched = document.querySelectorAll('.match-anim').length;
-        const totalCards = document.querySelectorAll('.card').length;
+        const totalMatched = document.querySelectorAll('.match-anim').length; //count matched cards
+        const totalCards = document.querySelectorAll('.card').length; //total cards on board
         
-        if (totalMatched === totalCards) {
-            let stage = totalCards === 18 ? "בינוני" : (totalCards === 24 ? "קשה" : "קל");
-
-            clearInterval(timerInterval);
+        if (totalMatched === totalCards) { //if all cards are matched, game over, then-
+            let stage = totalCards === 18 ? "בינוני" : (totalCards === 24 ? "קשה" : "קל"); //the current stage
 
             setTimeout(() => {
-                const isNewRecord = updateBestTime(totalCards, secondsElapsed);
+                const isNewRecord = updateBestTime(totalCards, secondsElapsed); //update best time
                 const msgContainer = document.getElementById('success-message');
                 const msgText = document.getElementById('message-text');
             
@@ -122,23 +108,22 @@ function checkMatch() {
                  סיימת את השלב ה${stage} ב-${timeString}${recordText}, מדהים! 🎉`;
             
                 msgContainer.classList.remove('hidden'); 
-                msgContainer.classList.add('bounce-in');
             }, 500);
+            //after 0.5 second delay, show success message with time and record info
         }
-    } else {
+    } else { //if not a match
         setTimeout(() => {
             card1.classList.remove('flipped');
             card2.classList.remove('flipped');
             flippedCards = [];
-        }, 700);
+        }, 700); //flip back after 0.7 second delay
     }
 }
 
 function goToMenu() {
-    const successMsg = document.getElementById('success-message');
-    successMsg.classList.remove('bounce-in');
-    successMsg.classList.add('hidden');
-    document.getElementById('startScreen').classList.remove('hidden-screen');
+    const successMsg = document.getElementById('success-message'); 
+    successMsg.classList.add('hidden'); //hide success message
+    document.getElementById('startScreen').classList.remove('hidden-screen'); //show start screen
 }
 
 function startTimer() {
@@ -146,13 +131,13 @@ function startTimer() {
         secondsElapsed++;
         const mins = Math.floor(secondsElapsed / 60).toString().padStart(2, '0');
         const secs = (secondsElapsed % 60).toString().padStart(2, '0');
-        document.getElementById('timer').innerText = `${mins}:${secs}`;
-    }, 1000);
+        document.getElementById('timer').innerText = `${mins}:${secs}`; //update timer display
+    }, 1000); //update every second (1000 milliseconds)
 }
 
 function updateBestTime(numCards, time) {
-    let bestTimes = JSON.parse(localStorage.getItem('memoryGameScores')) || {};
-    if (!bestTimes[numCards] || time < bestTimes[numCards]) {
+    let bestTimes = JSON.parse(localStorage.getItem('memoryGameScores')) || {}; //get best times from local storage (JSON to string)
+    if (!bestTimes[numCards] || time < bestTimes[numCards]) { //if no best time or current time is better
         bestTimes[numCards] = time;
         localStorage.setItem('memoryGameScores', JSON.stringify(bestTimes));
         return true; 

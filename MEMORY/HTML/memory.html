@@ -5,29 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>משחק הזיכרון האינטראקטיבי</title>
     <link rel="stylesheet" href="/MEMORY/CSS/memory.css">
+    <link rel="stylesheet" href="/MEMORY/CSS/start_screen.css">
 </head>
 <body>
 
-    <div class="main-container">
-        <header>
-            <h1>משחק הזיכרון</h1>
-            
-            <div id="difficulty-levels">
-                <button class="btn" onclick="startGame(12, 4,event)">קל</button>
-                <button class="btn" onclick="startGame(18, 6,event)">בינוני</button>
-                <button class="btn" onclick="startGame(24, 8,event)">קשה</button>
+    <div id="startScreen">
+        <div class="start-card">
+            <h1 class="title">משחק הזיכרון</h1>
+
+
+            <div class="difficulty-container">
+                <p class="instruction-text">בחר רמת קושי כדי להתחיל:</p>
+                <button class="startBtn" onclick="startGame(12, 4, event)">קל</button>
+                <button class="startBtn" onclick="startGame(18, 6, event)">בינוני</button>
+                <button class="startBtn" onclick="startGame(24, 8, event)">קשה</button>
             </div>
 
+            <p class="subtitle">הפעל את הזיכרון שלך!</p>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <header>
             <div id="game-info" class="hidden">
-                <div class="info-item">ניקוד: <span id="score">0</span></div>
                 <div class="info-item">זמן: <span id="timer">00:00</span></div>
                 <div class="info-item" id="best-score-container">שיא אישי: <span id="best-score">אין עדיין</span></div>
             </div>
         </header>
-
-        <div id="success-message" class="hidden">כל הכבוד!! 🎉</div>
-
+        <div id="success-message" class="hidden">
+            <div id="message-text" class="hidden"></div>
+            <button class="back-to-menu-btn" onclick="goToMenu()">חזרה לתפריט הראשי</button>
+        </div>
         <div id="game-board"></div>
+        <button class="back-to-menu-btn" onclick="goToMenu()">חזרה לתפריט הראשי</button>
     </div>
 
     <script src="/MEMORY/JS/memory.js"></script>

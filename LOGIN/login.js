@@ -84,15 +84,20 @@ loginForm.addEventListener("submit", (e) => {
     // 2. חיפוש המשתמש המתאים
     const foundUser = users.find(u => u.email === emailInput && u.password === passInput);
 
-    if (foundUser) {
-        // הצלחה
-        localStorage.setItem("token", "secret-token-" + Date.now());
-        document.cookie = `isLoggedIn=true; max-age=${3 * 60 * 60}; path=/`;
-        displayFeedback("loginMessage", "התחברת בהצלחה!", true);
-        setTimeout(() => location.reload(), 1000);
-    } else {
-        displayFeedback("loginMessage", "אימייל או סיסמה לא נכונים", false);
-    }
+   if (foundUser) {
+    // 1. יצירת טוקן ועוגייה (נשאר ללא שינוי)
+    localStorage.setItem("token", "secret-token-" + Date.now());
+    document.cookie = `isLoggedIn=true; max-age=${3 * 60 * 60}; path=/`;
+
+    // 2. הודעת הצלחה על המסך
+    displayFeedback("loginMessage", "התחברת בהצלחה! מעביר אותך לדף הבית...", true);
+
+    setTimeout(() => {
+        window.location.href = "/HOME/HTML/home.html"; 
+    }, 1200);
+} else {
+    displayFeedback("loginMessage", "אימייל או סיסמה לא נכונים", false);
+}
 });
 
 // בדיקת חיבור בטעינה

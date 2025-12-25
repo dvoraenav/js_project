@@ -1,17 +1,16 @@
-/* עיצוב מסך הפתיחה - הרקע המדורג */
 #startScreen {
     position: fixed;
     inset: 0;
     background: linear-gradient(135deg, #4facfe, #f857a6);
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /*אופקי*/
+    align-items: center; /*אנכי*/
     z-index: 2000;
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* המלבן הלבן המרכזי */
+/*the main container */
 .start-card {
     background: white;
     padding: 50px 40px;
@@ -24,43 +23,42 @@
     max-width: 400px;
 }
 
-/* הכותרת בתוך המלבן */
 .title {
     font-size: 42px;
     color: #2c3e50;
-    margin: 0 0 10px 0;
+    margin-bottom: 10px; /*רווח מתחת לטקסט*/
     font-weight: bold;
 }
 
-/* הטקסט "בחר רמת קושי" */
+/*choose level title */
 .instruction-text {
     color: #7f8c8d;
     font-size: 18px;
-    margin-bottom: 30px;
+    margin-bottom: 30px; /*רווח מתחת לטקסט*/
 }
 
 .difficulty-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /*מסדרת את האלמנטים בעמודה*/
     gap: 15px;
-    width: 100%; /* שהכפתורים יהיו ברוחב אחיד */
+    width: 100%; /* buttons have uniform width */
 }
 
-/* עיצוב הכפתורים בתוך המלבן */
+/* button styling inside the container */
 .startBtn {
     padding: 15px;
     font-size: 18px;
     border: none;
     border-radius: 12px;
-    cursor: pointer;
-    background-color: #165aad; /* ורוד שמתאים לרקע */
+    cursor: pointer; /*משנה את העכבר להיות לחצן*/
+    background-color: #165aad; 
     color: white;
     font-weight: bold;
     transition: all 0.3s ease;
 }
 
 .startBtn:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px); /*כשעוברים מעל זה עולה למעלה ומשנה צבע*/
     background-color: #0b256c;
 }
 
@@ -71,7 +69,7 @@
     font-weight: normal;
 }
 
-/* הסתרת מסך הפתיחה */
-.hidden-screen {
-    display: none !important;
+/*  כשלוחצים הסתרת מסך הפתיחה */
+#startScreen.hidden-screen {
+    display: none;
 }

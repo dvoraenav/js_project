@@ -9,33 +9,44 @@
 </head>
 <body>
 
+    <!-- Start Screen -->
     <div id="startScreen">
         <div class="start-card">
             <h1 class="title">משחק הזיכרון</h1>
 
-
+            <!-- Difficulty Selection
+             (number of cards, number of columns,) -->
             <div class="difficulty-container">
                 <p class="instruction-text">בחר רמת קושי כדי להתחיל:</p>
-                <button class="startBtn" onclick="startGame(12, 4, event)">קל</button>
-                <button class="startBtn" onclick="startGame(18, 6, event)">בינוני</button>
-                <button class="startBtn" onclick="startGame(24, 8, event)">קשה</button>
+                <button class="startBtn" onclick="startGame(4, 4)">קל</button>
+                <button class="startBtn" onclick="startGame(18, 6)">בינוני</button>
+                <button class="startBtn" onclick="startGame(24, 8)">קשה</button>
             </div>
 
             <p class="subtitle">הפעל את הזיכרון שלך!</p>
         </div>
     </div>
 
+    <!-- Main Game Container -->
     <div class="main-container">
         <header>
             <div id="game-info" class="hidden">
-                <div class="info-item">זמן: <span id="timer">00:00</span></div>
-                <div class="info-item" id="best-score-container">שיא אישי: <span id="best-score">אין עדיין</span></div>
+                <div class="info-item">זמן:
+                     <span id="timer">00:00</span>
+                </div>
+                <div class="info-item" id="best-score-container">שיא אישי: 
+                    <span id="best-score">אין עדיין</span>
+                </div>
             </div>
         </header>
+
+        <!-- Success Message when game is won -->
         <div id="success-message" class="hidden">
-            <div id="message-text" class="hidden"></div>
+            <div id="message-text"></div>
             <button class="back-to-menu-btn" onclick="goToMenu()">חזרה לתפריט הראשי</button>
         </div>
+
+        <!-- Game Board, the area where cards are displayed -->
         <div id="game-board"></div>
         <button class="back-to-menu-btn" onclick="goToMenu()">חזרה לתפריט הראשי</button>
     </div>

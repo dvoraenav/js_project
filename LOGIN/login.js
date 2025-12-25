@@ -1,84 +1,108 @@
+
 const tabs = document.querySelectorAll(".tab");
 const forms = document.querySelectorAll(".form");
+const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
 
+/**
+ * פונקציה להצגת הודעות בתוך הטופס
+ */
+// פונקציית עזר להצגת הודעות על המסך
+function displayFeedback(elementId, text, isSuccess) {
+    const msgElement = document.getElementById(elementId);
+    if (!msgElement) return;
 
+    msgElement.innerText = text;
+    msgElement.classList.remove("success", "error");
+    msgElement.classList.add(isSuccess ? "success" : "error");
+
+    setTimeout(() => {
+        msgElement.innerText = "";
+        msgElement.classList.remove("success", "error");
+    }, 4000);
+}
+// ניהול טאבים (התחברות/הרשמה)
 tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-
-    // 1. הסרת מחלקת active מכל הטאבים ומכל הטפסים
-    tabs.forEach(t => t.classList.remove("active"));
-    forms.forEach(f => f.classList.remove("active"));
-
-    // 2. הוספת active לטאב שנלחץ
-    tab.classList.add("active");
-
-    // 3. התיקון: חילוץ ה-ID של טופס היעד מתוך ה-Attribute
-    const targetId = tab.getAttribute("data-target");
-
-    // 4. הצגת הטופס המתאים בעזרת ה-ID שקיבלנו
-    document.getElementById(targetId).classList.add("active");
-  });
+    tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        forms.forEach(f => f.classList.remove("active"));
+        tab.classList.add("active");
+        const targetId = tab.getAttribute("data-target");
+        document.getElementById(targetId).classList.add("active");
+    });
 });
 
-// בדיקה מיד עם טעינת הדף
+// לוגיקת הרשמה
+// לוגיקת הרשמה עם אימות סיסמה
+registerForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const email = registerForm.querySelector('input[type="email"]').value;
+    const passwordInputs = registerForm.querySelectorAll('input[type="password"]');
+    
+    // בדיקה שיש לפחות שני שדות סיסמה (סיסמה ואימות)
+    if (passwordInputs.length < 2) {
+        displayFeedback("registerMessage", "חסר שדה אימות סיסמה ב-HTML", false);
+        return;
+    }
+
+    const password = passwordInputs[0].value;
+    const confirmPassword = passwordInputs[1].value;
+
+    // כאן מתבצע האימות שביקשת
+    if (password !== confirmPassword) {
+        displayFeedback("registerMessage", "הסיסמאות אינן תואמות!", false);
+        return; // זה מונע מהקוד להמשיך לשמירה
+    }
+
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // 2. בדיקה אם האימייל כבר קיים במערכת
+    const userExists = users.find(u => u.email === email);
+    if (userExists) {
+        displayFeedback("registerMessage", "המשתמש כבר קיים במערכת!", false);
+        return;
+    }
+
+    // 3. הוספת המשתמש החדש למערך
+    users.push({ email: email, password: password });
+
+    // 4. שמירה של המערך המעודכן חזרה ל-LocalStorage
+    localStorage.setItem("users", JSON.stringify(users));
+
+    displayFeedback("registerMessage", "נרשמת בהצלחה! יש כרגע " + users.length + " משתמשים.", true);
+    displayFeedback("registerMessage", "נרשמת בהצלחה!", true);
+});
+// לוגיקת התחברות
+loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const emailInput = loginForm.querySelector('input[type="email"]').value;
+    const passInput = loginForm.querySelector('input[type="password"]').value;
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // 2. חיפוש המשתמש המתאים
+    const foundUser = users.find(u => u.email === emailInput && u.password === passInput);
+
+    if (foundUser) {
+        // הצלחה
+        localStorage.setItem("token", "secret-token-" + Date.now());
+        document.cookie = `isLoggedIn=true; max-age=${3 * 60 * 60}; path=/`;
+        displayFeedback("loginMessage", "התחברת בהצלחה!", true);
+        setTimeout(() => location.reload(), 1000);
+    } else {
+        displayFeedback("loginMessage", "אימייל או סיסמה לא נכונים", false);
+    }
+});
+
+// בדיקת חיבור בטעינה
 window.addEventListener("load", () => {
-    // בודק אם העוגייה שקראנו לה 'isLoggedIn' עדיין קיימת
     const hasCookie = document.cookie.includes("isLoggedIn=true");
     const hasToken = localStorage.getItem("token");
 
     if (hasCookie && hasToken) {
-        console.log("המשתמש מחובר והזמן לא עבר.");
-        // אופציונלי: להסתיר את הטפסים אם הוא מחובר
-        // document.querySelector(".login-box").style.display = "none";
+        console.log("מחובר.");
     } else {
-        // אם העוגייה נמחקה ע"י הדפדפן (אחרי 3 שעות) או שלא הייתה קיימת
-        localStorage.removeItem("token"); 
-        console.log("אין חיבור בתוקף.");
+        localStorage.removeItem("token");
     }
-});
-
-
-// 1. קודם כל מגדירים את המשתנים ומושכים מה-HTML
-const loginForm = document.getElementById("loginForm");
-const registerForm = document.getElementById("registerForm");
-
-// 2. פונקציית הרשמה - שומרת את הנתונים
-registerForm.addEventListener("submit", (e) => {
-    e.preventDefault(); // מונע מהדף להתרענן ולהציג פרטים ב-URL
-
-    const email = registerForm.querySelector('input[type="email"]').value;
-    const password = registerForm.querySelector('input[type="password"]').value;
-
-    // שמירה ב-LocalStorage תחת המפתח 'user'
-    const userData = { email: email, password: password };
-    localStorage.setItem("user", JSON.stringify(userData));
-
-    alert("נרשמת בהצלחה! עכשיו אפשר להתחבר.");
-});
-
-// 3. פונקציית התחברות - בודקת מול מה ששמרנו
-loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const emailInput = loginForm.querySelector('input[type="email"]').value;
-    const passInput = loginForm.querySelector('input[type="password"]').value;
-
-    // שליפת הנתונים ששמרנו בהרשמה
-    const savedUser = JSON.parse(localStorage.getItem("user"));
-
-    // בתוך loginForm.addEventListener("submit" ...
-if (savedUser && savedUser.email === emailInput && savedUser.password === passInput) {
-    
-    // 1. יצירת טוקן ב-LocalStorage
-    localStorage.setItem("token", "secret-token-" + Date.now());
-
-    // 2. יצירת עוגייה ל-3 שעות (3 שעות = 10800 שניות)
-    const THREE_HOURS = 3 * 60 * 60;
-    document.cookie = `isLoggedIn=true; max-age=${THREE_HOURS}; path=/`;
-
-    alert("התחברת בהצלחה! החיבור תקף ל-3 שעות.");
-    
-    // כאן אפשר להוסיף ריענון דף כדי שהבדיקה מלמעלה תרוץ
-    location.reload(); 
-}
 });

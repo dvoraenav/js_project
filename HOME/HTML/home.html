@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עולם המשחקים - דף הבית</title>
+    <link rel="stylesheet" href="/HOME/CSS/home.css">
+</head>
+<body>
+
+            <nav class="top-menu">
+               <div class="menu-container">
+                   <div class="logo">
+                       <img src="/IMG/logo.png" class="logo">
+                   </div>     
+                                      <a class="btn_login" onclick="location.href='/LOGIN/login.html'">להתחברות</a>
+      
+                   <ul class="nav-links">
+                       <li><a href="#"onclick="location.href='/HOME/HTML/home.html'">משחקים</a></li>
+                       <li><a href="#" onclick="showOops()">בדיחות</a></li>
+                       <li><a href="#" onclick="showOops()">חידות</a></li>
+                       <li><a href="#" onclick="showOops()">דפי צביעה</a></li>
+                       <li><a href="#" onclick="showOops()">יצירה</a></li>
+                       <li><a href="#" onclick="showOops()">ילדים</a></li>
+                       <li><a href="#" onclick="showOops()">משחקים ל2</a></li>
+                       <li><a href="#" onclick="showOops()">ספורט</a></li>
+                       <li><a href="#" onclick="showOops()">מרוצים</a></li>
+                       <li><a href="#" onclick="showOops()">אוכל</a></li>
+                       <li><a href="#" onclick="showOops()">חדש 2026</a></li>
+                   </ul>
+
+               </div>
+            </nav>
+
+        <main class="apps-container">
+            
+            <div class="app-card active" onclick="location.href='/MEMORY/HTML/memory.html'">
+                <div class="floating-badge able">
+                    <span>זמין<br>למשחק</span>
+                </div>
+                <div class="app-icon">🧠</div>
+                <div class="app-content">
+                    <h3>משחק הזיכרון</h3>
+                    <p>מצא את כל הזוגות במינימום זמן!</p>
+                    
+                    <div class="game-mini-stats">
+                        <div class="mini-stat-item">
+                            <span class="mini-label">קל:</span>
+                            <span id="best-easy" class="mini-value">--</span>
+                        </div>
+                        <div class="mini-stat-item">
+                            <span class="mini-label">בינוני:</span>
+                            <span id="best-medium" class="mini-value">--</span>
+                        </div>
+                        <div class="mini-stat-item">
+                            <span class="mini-label">קשה:</span>
+                            <span id="best-hard" class="mini-value">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-card active" onclick="location.href='/SNAKE/HTML/snack.html'">
+                <div class="floating-badge able">
+                    <span>זמין<br>למשחק</span>
+                </div>
+                <div class="app-icon">🐍</div>
+                <div class="app-content">
+                    <h3>סנייק (Snake)</h3>
+                    <p>נווט את הנחש ואסוף נקודות</p>
+                    
+                    <div class="game-mini-stats">
+                        <div class="mini-stat-item">
+                            <span class="mini-label">שיא:</span>
+                            <span id="snakeStats" class="mini-value">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">🎨</div>
+                <div class="app-content">
+                    <h3>ציור חופשי</h3>
+                    <p>בקרוב תוכלו לצייר כאן...</p>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">💡</div>
+                <div class="app-content">
+                    <h3>אלוף הטריוויה</h3>
+                    <p>מבחן הידע הגדול: כמה שאלות תצליחו לעבור?</p>
+                </div>
+            </div>
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">🧱</div>
+                <div class="app-content">
+                    <h3>טטריס קלאסי</h3>
+                    <p>סדרו את הבלוקים לפני שהמסך יתמלא!</p>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">⭕</div>
+                <div class="app-content">
+                    <h3>איקס עיגול</h3>
+                    <p>הקרב הקלאסי: מי יצליח ליצור רצף ראשון?</p>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">🏎️</div>
+                <div class="app-content">
+                    <h3>מרוץ מכוניות</h3>
+                    <p>החזיקו חזק: כמה רחוק תצליחו להגיע?</p>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">🐦</div>
+                <div class="app-content">
+                    <h3>הציפור המעופפת</h3>
+                    <p>לחיצה אחת קטנה – והציפור באוויר!</p>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">💣</div>
+                <div class="app-content">
+                    <h3>שולה המוקשים</h3>
+                    <p>זהירות! צעד אחד לא נכון והכל מתפוצץ...</p>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">🧩</div>
+                <div class="app-content">
+                    <h3>פאזל יומי</h3>
+                    <p>משימה חדשה בכל יום: תצליחו להרכיב?</p>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">🪜</div>
+                <div class="app-content">
+                    <h3>הטיפוס הגדול</h3>
+                    <p>קפצו בין פלטפורמות והגיעו עד לעננים!</p>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">🟡</div>
+                <div class="app-content">
+                    <h3>אוכל הנקודות</h3>
+                    <p>רוצו במבוך ותברחו מהרוחות הרעבות</p>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">🏒</div>
+                <div class="app-content">
+                    <h3>הוקי אוויר</h3>
+                    <p>קרב מהיר על השולחן: מי יבקיע ראשון?</p>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">🔢</div>
+                <div class="app-content">
+                    <h3>אתגר 2048</h3>
+                    <p>חברו את המספרים והגיעו לקוביה הנכספת!</p>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">🏀</div>
+                <div class="app-content">
+                    <h3>מלך הסלים</h3>
+                    <p>כמה סלים תצליחו לקלוע בדקה אחת?</p>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">🎾</div>
+                <div class="app-content">
+                    <h3>תגובה מהירה</h3>
+                    <p>אל תתנו לכדור ליפול! מבחן זריזות ידיים.</p>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">🏢</div>
+                <div class="app-content">
+                    <h3>מגדל פיקסל</h3>
+                    <p>הניחו קומה מעל קומה – כמה גבוה תגיעו?</p>
+                </div>
+            </div>
+
+            <div class="app-card coming-soon">
+                <div class="floating-badge non-able">
+                    <span>בפיתוח</span>
+                </div>
+                <div class="app-icon">🕵️</div>
+                <div class="app-content">
+                    <h3>איפה זה?</h3>
+                    <p>מצאו את החפץ המסתתר בתמונה הצפופה.</p>
+                </div>
+            </div>
+
+        </main>
+
+    <script src="/HOME/JS/home.js"></script>
+</body>
+</html>

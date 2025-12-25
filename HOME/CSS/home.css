@@ -1,0 +1,213 @@
+* {
+    box-sizing: border-box; 
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(circle at center, #222a66 0%, #000000 100%);
+    background-attachment: fixed;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+}
+
+.stat-label { font-size: 14px; display: block; }
+.stat-value { font-size: 24px; font-weight: bold; }
+
+
+
+.apps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px; /* הרווח שמונע מהכרטיסים להידבק לקיר */
+    width: auto;   /* חשוב: auto במקום 100% */
+    margin: 0;
+    margin-top: 140px; /* כדי לאפשר מקום לתפריט העליון */
+}
+
+/* רקע הכרטיס - מראה זכוכית כהה */
+.app-card {
+    background: rgba(255, 255, 255, 0.08); /* טיפה יותר בהיר מהקוד הקודם */
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* מסגרת לבנה עדינה */
+    border-radius: 24px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    color: white;
+    overflow: visible;
+}
+
+/* כרטיס פעיל - אפקט הארה כחול */
+.app-card.active {
+    border: 3px solid rgba(110, 142, 251, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.app-card.active:hover {
+    transform: translateY(-12px) scale(1.02);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(110, 142, 251, 0.4); /* הילה כחולה */
+    border-color: #6e8efb;
+}
+
+/* כרטיס "בפיתוח" - מראה זכוכית בהירה עדינה */
+.app-card.coming-soon {
+    filter: grayscale(0.6);      /* פחות אפור מבעבר כדי שיראו צבע */
+    opacity: 0.8;                /* העלינו מ-0.5 כדי שיהיה גלוי */
+    background: rgba(255, 255, 255, 0.15); /* רקע בהיר שקוף שבולט על שחור */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ביטול השקיפות של הטקסט בפנים כדי שיהיה קריא */
+.app-card.coming-soon h3, 
+.app-card.coming-soon p,
+.app-card.coming-soon .app-icon {
+    opacity: 1;
+}
+
+.app-icon { font-size: 50px; margin-bottom: 15px; }
+
+/* העיגול הצף */
+.floating-badge {
+    position: absolute;
+    top: -15px;      /* מוציא אותו חצי החוצה למעלה */
+    left: -15px;     /* מוציא אותו חצי החוצה שמאלה */
+    width: 75px;     /* גודל העיגול */
+    height: 75px;
+    border-radius: 50%; /* הופך לריבוע לעיגול */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* צל שנותן עומק */
+    border: 4px solid white; /* מסגרת לבנה להפרדה */
+    z-index: 5;
+    transform: rotate(-10deg); /* סיבוב קטן למראה שובבי */
+}
+
+.floating-badge.able {
+        background: #148521; /* צבע בולט */
+}
+
+.floating-badge.non-able {
+        background: #e62a2a; /* צבע בולט */
+}
+
+/* הטקסט בתוך העיגול */
+.floating-badge span {
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.1;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.top-menu {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(18, 18, 35, 0.80);
+    border-bottom: 2px solid #6e8efb; /* פס זוהר בתחתית */
+    box-shadow: 0 0 15px rgba(110, 142, 251, 0.4);
+}
+
+.menu-container {
+    display: flex;
+    align-items: center;
+    /* אנחנו משנים ל-flex-start כדי שהם יהיו צמודים אחד לשני כברירת מחדל */
+    width: 100%;
+    max-width: 1400px; /* או כל רוחב שמתאים לך */
+    margin: 0 auto;
+}
+
+
+
+
+.logo img {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 30px;
+    margin-left: 20px;
+    height: 100px; /* גובה הלוגו */
+    border-radius: 50%; /* הופך לריבוע לעיגול */
+}
+
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    /* הקוד הבא הוא הקסם: הוא דוחף את התפריט לצד הנגדי */
+}
+
+
+.nav-links li a {
+    text-decoration: none;
+    color: #007bff; /* כחול כמו בתמונה */
+    font-weight: bold;
+    font-size: 20px;
+    transition: color 0.3s;
+    font-family: 'Orbitron', sans-serif; /* פונט גיימרים (אם תרצי להוסיף) */
+    text-transform: uppercase;
+}
+
+.nav-links li a:hover {
+    color: #79b2f0;
+    text-decoration: underline;
+}
+
+.btn_login {
+    background: linear-gradient(135deg, #6e8efb, #a777e3); /* מעבר צבעים מודרני */
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 50px; /* צורת גלולה שתואמת את הלוגו והכרטיסים */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(110, 142, 251, 0.3); /* הילה עדינה מסביב */
+    text-transform: uppercase; /* אותיות גדולות (אם זה באנגלית) למראה מקצועי */
+    letter-spacing: 1px;
+    outline: none;
+    margin-left: 50px;
+
+
+}
+
+
+/* אפקט במעבר עכבר (Hover) */
+.btn_login:hover {
+    transform: translateY(-2px); /* קפיצה קטנה למעלה */
+    box-shadow: 0 6px 20px rgba(110, 142, 251, 0.5); /* התחזקות ההילה */
+    background: linear-gradient(135deg, #a777e3, #6e8efb); /* היפוך הצבעים */
+}
+
+/* אפקט בזמן לחיצה */
+.btn_login:active {
+    transform: translateY(1px); /* תחושת לחיצה אמיתית */
+    box-shadow: 0 2px 10px rgba(110, 142, 251, 0.3);
+}
+
+
+
+.game-mini-stats {
+    background: rgba(0, 0, 0, 0.4); /* רקע כהה שקוף */
+    border: 1px solid rgba(110, 142, 251, 0.5); /* מסגרת כחולה זוהרת */
+    border-radius: 12px;
+    padding: 8px 15px;
+    display: inline-flex; /* גורם למסגרת להתכווץ לפי גודל הטקסט */
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    box-shadow: 0 0 10px rgba(110, 142, 251, 0.2);
+    transition: all 0.3s ease;
+}

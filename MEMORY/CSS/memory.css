@@ -4,7 +4,7 @@
 }
 
 body {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #4facfe, #f857a6);
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
     display: flex;
@@ -153,7 +153,7 @@ body {
 
 .back-to-menu-btn {
     margin-top: 30px;
-    background-color: #3498db; 
+    background-color: #2d4e8d; 
     color: white;
     border: none;
     padding: 12px 35px;
@@ -167,7 +167,7 @@ body {
 }
 
 .back-to-menu-btn:hover {
-    background-color: #2980b9;
+    background-color: #5b419f;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
 }

@@ -1,29 +1,40 @@
 function updateDashboard() {
-
-    snakeStats
-    // משיכת השיאים מהמחסן (LocalStorage)
-    const memoryScores = JSON.parse(localStorage.getItem('memoryGameScores')) || {};
-    const snakeScore = JSON.parse(localStorage.getItem('snakeStats')) || {};
-
-    if (snakeScore['highScore']) { 
-               document.getElementById('snakeStats').innerText = snakeScore['highScore']+" נקודות";
-    } 
-   
-    // הצגת השיא של רמה "קלה"
-    if (memoryScores[12]) {
-        document.getElementById('best-easy').innerText = formatTime(memoryScores[12]);
+    // 1. שליפת המייל של המשתמש המחובר
+    const currentUserEmail = localStorage.getItem('currentUserEmail');
+    
+    // אם אין משתמש מחובר (למשל נכנסו לדף ישירות בלי לוגין), אפשר להפסיק כאן
+    if (!currentUserEmail) {
+        console.log("No user is logged in");
+        return;
     }
 
-    // הצגת השיא של רמה "בינוני"
-    if (memoryScores[18]) {
-        document.getElementById('best-medium').innerText = formatTime(memoryScores[18]);
-    }   
+    // --- עדכון שיא סנייק ---
+    const allSnakeStats = JSON.parse(localStorage.getItem('snakeStats')) || {};
+    // שליפת הנתונים של היוזר הנוכחי מתוך האובייקט הגדול
+    const userSnakeData = allSnakeStats[currentUserEmail] || { highScore: 0 };
+    document.getElementById('snakeStats').innerText = userSnakeData.highScore + " נקודות";
 
-    // הצגת השיא של רמה "קשה"
-    if (memoryScores[24]) {
-        document.getElementById('best-hard').innerText = formatTime(memoryScores[24]);
-    }
+    // --- עדכון שיאי משחק הזיכרון ---
+    const allMemoryStats = JSON.parse(localStorage.getItem('memoryGameScores')) || {};
+    // שליפת הנתונים של היוזר הנוכחי מתוך אובייקט הזיכרון
+    const userMemoryScores = allMemoryStats[currentUserEmail] || {};
+
+    // הצגת שיא רמה קלה (12)
+    document.getElementById('best-easy').innerText = userMemoryScores[12] 
+        ? formatTime(userMemoryScores[12]) 
+        : "--:--";
+
+    // הצגת שיא רמה בינונית (18)
+    document.getElementById('best-medium').innerText = userMemoryScores[18] 
+        ? formatTime(userMemoryScores[18]) 
+        : "--:--";
+
+    // הצגת שיא רמה קשה (24)
+    document.getElementById('best-hard').innerText = userMemoryScores[24] 
+        ? formatTime(userMemoryScores[24]) 
+        : "--:--";
 }
+
 
 function showOops() {
     alert("אופס! החלק הזה עדיין בפיתוח... 🛠️");

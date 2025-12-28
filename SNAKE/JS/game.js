@@ -21,7 +21,7 @@ for (let y = 0; y < size; y++) {
   }
 }
 //תצוגת לוח ראשוני
-resetGame();
+
 
 
 
@@ -85,6 +85,11 @@ function resetGame() {
   time=0;
   scoreEl.textContent="score:" + score;
   timeEl.textContent="time:" + time;
+  const stats = getStats(); 
+  const highScoreEl = document.getElementById('highScoreDisplay'); // ודאי שקיים אלמנט כזה ב-HTML
+  if (highScoreEl) {
+      highScoreEl.textContent = "High Score: " + stats.highScore;
+  }
 
   snake = [
     { x: 4, y: 5 },
@@ -167,3 +172,6 @@ function gameOver() {
     onGameOver(score);
   }
 }
+window.onload = function() {
+    resetGame();
+};

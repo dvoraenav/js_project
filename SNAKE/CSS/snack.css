@@ -85,6 +85,7 @@
   font-size: 16px;
   cursor: pointer;
   background-color: aqua;
+  border-radius: 10px;
 }
 
 .gameover-box button:hover {
@@ -112,4 +113,27 @@
   font-weight: 600;
   background: rgba(0, 0, 0, 0.05);
   border-radius: 6px;
+}
+
+.backBtn {
+    margin-top: 25px; /* רווח מהכפתורים שמעל */
+    display: inline-block;
+    text-decoration: none;
+    color: #6e8efb; /* הצבע הכחול של האתר שלך */
+    border: 2px solid #6e8efb;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+     background-color: #e7eadd;
+}
+
+.backBtn:hover {
+    background-color: #e7eadd;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(110, 142, 251, 0.2);
+    color: #a777e3; /* משנה צבע לסגול ב-hover */
+    border-color: #a777e3;
 }

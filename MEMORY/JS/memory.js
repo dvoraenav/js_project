@@ -18,7 +18,14 @@ function startGame(numCards, columns) {
     board.innerHTML = '';  //clear previous board
     flippedCards = []; // reset flipped cards
 
-    const bestTimes = JSON.parse(localStorage.getItem('memoryGameScores')) || {}; //translate from local storage Json to string
+            // 1. שליפת המייל של המשתמש המחובר
+    const currentUser = localStorage.getItem('currentUserEmail');
+
+        // 2. שליפת כל טבלת השיאים של כל המשתמשים
+    const allMemoryStats = JSON.parse(localStorage.getItem('memoryGameScores')) || {};
+
+        // 3. שליפת השיאים הספציפיים רק של היוזר הזה
+    const bestTimes = allMemoryStats[currentUser] || {}; //translate from local storage Json to string
     const bestScoreElement = document.getElementById('best-score'); //from memory.html
 
     if (bestTimes[numCards]) { // if there is a best time for this level
@@ -136,10 +143,21 @@ function startTimer() {
 }
 
 function updateBestTime(numCards, time) {
-    let bestTimes = JSON.parse(localStorage.getItem('memoryGameScores')) || {}; //get best times from local storage (JSON to string)
-    if (!bestTimes[numCards] || time < bestTimes[numCards]) { //if no best time or current time is better
-        bestTimes[numCards] = time;
-        localStorage.setItem('memoryGameScores', JSON.stringify(bestTimes));
+    const currentUser = localStorage.getItem('currentUserEmail'); 
+    if (!currentUser) return false;
+
+    let allMemoryStats = JSON.parse(localStorage.getItem('memoryGameScores')) || {};
+
+   
+    let userTimes = allMemoryStats[currentUser] || {};
+
+    if (!userTimes[numCards] || time < userTimes[numCards]) {
+        userTimes[numCards] = time;
+        
+       
+        allMemoryStats[currentUser] = userTimes; 
+        
+        localStorage.setItem('memoryGameScores', JSON.stringify(allMemoryStats));
         return true; 
     }
     return false;

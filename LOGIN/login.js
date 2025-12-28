@@ -88,7 +88,7 @@ loginForm.addEventListener("submit", (e) => {
     // 1. יצירת טוקן ועוגייה (נשאר ללא שינוי)
     localStorage.setItem("token", "secret-token-" + Date.now());
     document.cookie = `isLoggedIn=true; max-age=${3 * 60 * 60}; path=/`;
-
+    localStorage.setItem("currentUserEmail",emailInput);
     // 2. הודעת הצלחה על המסך
     displayFeedback("loginMessage", "התחברת בהצלחה! מעביר אותך לדף הבית...", true);
 

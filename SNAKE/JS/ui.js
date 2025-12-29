@@ -16,6 +16,7 @@ startBtn.addEventListener("click", () => {
   startGame();                        // התחלת המשחק
 });
 
+
 // הצגת מסך Game Over
 // מציג ניקוד סופי, שיא ורשימת משחקים קודמים
 function showGameOverScreen() {

@@ -50,6 +50,29 @@ function formatTime(totalSeconds) {
     
     return `${displayMinutes}:${displaySeconds}`;
 }
+window.addEventListener("load", () => {
+    // 1. שליפת המייל ששמרנו בזמן ההתחברות
+    const userEmail = localStorage.getItem("currentUserEmail");
+    const welcomeElement = document.getElementById("welcomeUser");
 
+    if (userEmail && welcomeElement) {
+        // 2. חיתוך המייל כדי לקבל רק את השם לפני ה-@ (אופציונלי)
+        const userName = userEmail.split('@')[0];
+        
+        // 3. עדכון התצוגה
+        welcomeElement.innerText = `שלום, ${userName}! 👋`;
+    }
+});
+// בדיקה שרצה כל דקה כדי לראות אם העוגייה פגה
+setInterval(() => {
+    const hasCookie = document.cookie.includes("isLoggedIn=true");
+    if (!hasCookie && localStorage.getItem("token")) {
+        console.log("החיבור פג - מנתק עכשיו...");
+        localStorage.removeItem("token");
+        localStorage.removeItem("currentUserEmail");
+        // alert("החיבור שלך פג, אנא התחבר שוב.");
+        window.location.href = "/LOGIN/login.html";
+    }
+}, 60000); // 60,000 מילישניות = דקה אחת
 // קריאה לפונקציה בטעינת העמוד
 window.onload = updateDashboard;

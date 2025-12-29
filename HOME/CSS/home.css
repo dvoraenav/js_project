@@ -126,8 +126,7 @@ body {
     align-items: center;
     width: 100%;
     margin: 0 auto;
-
-    justify-content: space-between; /* מפזר את הלוגו, הכפתור והלינקים */
+   
 }
 
 
@@ -207,3 +206,11 @@ body {
     transition: all 0.3s ease;    
 }
 
+
+/* שלום,משתמש */
+.welcome-text {
+    color: #ffffff; /* צבע לבן כדי שייראה על הרקע הכחול */
+    font-size: 14px;
+    font-weight: bold;
+    direction: rtl;
+}

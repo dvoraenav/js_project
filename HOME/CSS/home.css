@@ -122,17 +122,13 @@ body {
     background: radial-gradient(circle at center, rgba(34, 42, 102, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
     border-bottom: 2px solid #6e8efb; /* פס זוהר בתחתית */
     box-shadow: 0 0 15px rgba(110, 142, 251, 0.4);
-}
-
-.menu-container {
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 1400px; /* או כל רוחב שמתאים לך */
     margin: 0 auto;
+
+    justify-content: space-between; /* מפזר את הלוגו, הכפתור והלינקים */
 }
-
-
 
 
 .logo img {
@@ -210,3 +206,4 @@ body {
     box-shadow: 0 0 10px rgba(110, 142, 251, 0.2);
     transition: all 0.3s ease;    
 }
+

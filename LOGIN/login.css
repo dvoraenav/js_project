@@ -9,7 +9,6 @@ body {
   
 }
 
-
 .form {
   display: none; /* כברירת מחדל הטופס הרשמה מוסתר */
   flex-direction: column;
@@ -73,7 +72,7 @@ input::placeholder {
 }
 
 
-/* עיצוב כללי לתיבת ההודעות */
+/*  עיצוב כללי לתיבת ההודעות */
 .form-message {
     display: none; /* מוסתר כברירת מחדל */
     padding: 10px;

@@ -5,9 +5,12 @@ let scoreEl=document.getElementById('score');
 let timeEl=document.getElementById('time');
 let score=0;
 let time=0;
-let gameLoop;
-let timeInterval;
+let gameLoop;//לולאת המשחק
+let timeInterval;//מהירות המשחק
 let onGameOver = null;
+let snake = [];
+let direction = "RIGHT";//כיוון הנחש זז ימינה בהתחלה
+let food = null;
 
 // יצירת לוח המשחק (div לכל תא)
 
@@ -20,10 +23,30 @@ for (let y = 0; y < size; y++) {
     board.appendChild(cell);
   }
 }
-//תצוגת לוח ראשוני
 
+// מגריל מיקום אקראי לאוכל
+function createFood() {
+  let newFood;
+  let isFoodOnSnake = true;
 
+  // הלולאה תמשיך לרוץ כל עוד המשתנה הוא true
+  while (isFoodOnSnake) {
+    // 1. הגרלת מיקום חדש
+    newFood = {
+      x: Math.floor(Math.random() * size),
+      y: Math.floor(Math.random() * size)
+    };
 
+    // 2. בדיקה האם המיקום הזה נמצא בתוך המערך של הנחש
+    // הפונקציה some בודקת אם לפחות איבר אחד בנחש נמצא באותן קואורדינטות
+    isFoodOnSnake = snake.some(part => part.x === newFood.x && part.y === newFood.y);
+    
+    // אם isFoodOnSnake יצא false (המיקום פנוי), הלולאה תיעצר
+  }
+
+  // 3. החזרת המיקום הפנוי שמצאנו
+  return newFood;
+}
 
 //לקלוט את החיצים במקלדת
 document.addEventListener("keydown",(event)=>{
@@ -51,7 +74,6 @@ function startTimer() {
 }
 
 
-
 // מצייר את הנחש והאוכל על הלוח
 function draw() {
   // ניקוי כל התאים
@@ -60,6 +82,7 @@ function draw() {
   });
 
   // ציור הנחש
+  //עוברים על כל רשימת הנחש ועל התאים ששם מחילים את העיצוב של נחש שזה צובע תמשבצת בירוק
   snake.forEach(part => {
     const cell = document.querySelector(
       `.cell[data-x="${part.x}"][data-y="${part.y}"]`
@@ -86,7 +109,7 @@ function resetGame() {
   scoreEl.textContent="score:" + score;
   timeEl.textContent="time:" + time;
   const stats = getStats(); 
-  const highScoreEl = document.getElementById('highScoreDisplay'); // ודאי שקיים אלמנט כזה ב-HTML
+  const highScoreEl = document.getElementById('highScoreDisplay'); 
   if (highScoreEl) {
       highScoreEl.textContent = "High Score: " + stats.highScore;
   }
@@ -137,19 +160,12 @@ if (newHead.x === food.x && newHead.y === food.y) {
    score++;
    scoreEl.textContent="score:" + score;
    
- 
 } else {
   snake.pop();//אם לא אכלנו אז מורידים את הזנב כי לא צריך לגדול
 }
 
-// מגריל מיקום אקראי לאוכל
 }
-function createFood() {
-  return {
-    x: Math.floor(Math.random() * size),
-    y: Math.floor(Math.random() * size)
-  };
-}
+
 
 // מפעיל את המשחק
 function startGame(){

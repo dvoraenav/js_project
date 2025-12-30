@@ -49,7 +49,7 @@ registerForm.addEventListener("submit", (e) => {
     const password = passwordInputs[0].value;
     const confirmPassword = passwordInputs[1].value;
 
-    // כאן מתבצע האימות שביקשת
+    // כאן מתבצע האימות
     if (password !== confirmPassword) {
         displayFeedback("registerMessage", "הסיסמאות אינן תואמות!", false);
         return; // זה מונע מהקוד להמשיך לשמירה
@@ -70,8 +70,6 @@ registerForm.addEventListener("submit", (e) => {
 
     // 4. שמירה של המערך המעודכן חזרה ל-LocalStorage
     localStorage.setItem("users", JSON.stringify(users));
-
-    displayFeedback("registerMessage", "נרשמת בהצלחה! יש כרגע " + users.length + " משתמשים.", true);
     displayFeedback("registerMessage", "נרשמת בהצלחה!", true);
 });
 // לוגיקת התחברות

@@ -33,7 +33,7 @@ function saveStats(userStats) {
 function saveScore(score) {
   const stats = getStats(); // מקבלת אוטומטית את של המשתמש הנוכחי
 
-  stats.scores.unshift(score);
+  stats.scores.unshift(score);//מה שהשגנו עכשיו עומד להיות בראש הרשימה
   if (stats.scores.length > 3) stats.scores.pop();
 
   if (score > stats.highScore) {

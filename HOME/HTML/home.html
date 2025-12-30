@@ -39,21 +39,13 @@
                 <div class="app-icon">🧠</div>
                 <div class="app-content">
                     <h3>משחק הזיכרון</h3>
-                    <p>מצא את כל הזוגות במינימום זמן!</p>
+                    <p>מצא את כל הזוגות במהירות!</p>
                     <div class="game-stats">
-                        <span class="mini-label">השיאים שלך:</span>
+                        <span class="mini-label"> הכי מובילים:</span>
+                        <button class="rank-toggle-btn" onclick="event.stopPropagation(); toggleRank('memory')">🏆 טבלת שיאים</button>
+                         <div id="memory-rank-list" class="rank-list-container"></div>
                         <div class="game-mini-stats">
                             <div class="mini-stat-item">
-                                <span class="mini-label">קל:</span>
-                                <span id="best-easy" class="mini-value">--</span>
-                            </div>
-                            <div class="mini-stat-item">
-                                <span class="mini-label">בינוני:</span>
-                                <span id="best-medium" class="mini-value">--</span>
-                            </div>
-                            <div class="mini-stat-item">
-                                <span class="mini-label">קשה:</span>
-                                <span id="best-hard" class="mini-value">--</span>
                             </div>
                         </div>                  
                     </div>
@@ -69,11 +61,12 @@
                     <h3>סנייק (Snake)</h3>
                     <p>נווט את הנחש ואסוף נקודות</p>
                     
-                    <div class="game-mini-stats game-stats">
-                        <div class="mini-stat-item">
-                            <span class="mini-label">שיא:</span>
-                            <span id="snakeStats" class="mini-value">--</span>
-                        </div>
+                    <div class="game-stats">
+                        <span class="mini-label">הכי מובילים:</span>
+                        <button class="rank-toggle-btn" onclick="event.stopPropagation(); toggleRank('snake')">
+                            🏆 טבלת שיאים
+                        </button>
+                    <div id="snake-rank-list" class="rank-list-container"></div>
                     </div>
                 </div>
             </div>

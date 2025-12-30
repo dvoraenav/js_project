@@ -31,14 +31,19 @@
 
 ## 🖼️ צילומי מסך (Screenshots)
 
-### לוח הבקרה וטבלת השיאים
-![Dashboard](images/dashboard.png)
 
-### משחק הסנייק
-![Snake Game](images/snake.png)
+<img width="1904" height="976" alt="צילום מסך 2025-12-30 224745" src="https://github.com/user-attachments/assets/700eafc2-3602-41cb-968d-26ae3aeab67f" />
+<img width="672" height="571" alt="צילום מסך 2025-12-30 224759" src="https://github.com/user-attachments/assets/ec4f0e9b-41ea-48fa-8998-de8b37b05755" />
+<img width="1006" height="577" alt="צילום מסך 2025-12-30 224812" src="https://github.com/user-attachments/assets/6067648f-e5c5-4211-a0cd-d1493e88179b" />
+<img width="878" height="556" alt="צילום מסך 2025-12-30 224831" src="https://github.com/user-attachments/assets/69037eb1-ebbf-49ed-bc6a-7f80d53197f8" />
+<img width="1663" height="898" alt="צילום מסך 2025-12-30 224854" src="https://github.com/user-attachments/assets/5c96ab69-6fd7-4d31-a0b1-eb9b51c67a56" />
+<img width="804" height="876" alt="צילום מסך 2025-12-30 224931" src="https://github.com/user-attachments/assets/c9e2f7a9-04cb-4161-98dd-9c602783de73" />
+<img width="1045" height="884" alt="צילום מסך 2025-12-30 224904" src="https://github.com/user-attachments/assets/fc81f964-bb73-4b6c-87a3-1cabf8d8ef2f" />
+<img width="991" height="862" alt="צילום מסך 2025-12-30 224954" src="https://github.com/user-attachments/assets/06f156e1-f035-4d04-9a04-e2370c91793c" />
+<img width="1108" height="822" alt="צילום מסך 2025-12-30 225048" src="https://github.com/user-attachments/assets/db9f22c7-050c-4c5c-b860-6230ee507b98" />
 
-### משחק הזיכרון
-![Memory Game](images/memory.png)
+
+
 
 ---
 

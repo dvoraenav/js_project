@@ -97,5 +97,4 @@ setInterval(() => {
         window.location.href = "/LOGIN/login.html";
     }
 }, 60000); // 60,000 מילישניות = דקה אחת
-// קריאה לפונקציה בטעינת העמוד
-window.onload = updateDashboard;
+

@@ -109,11 +109,24 @@ body {
 }
 
 /* זוג שנמצא */
+
+@keyframes matchBounce {
+    0% { transform: scale(1); } /* מתחיל במצב רגיל */
+    50% { transform: scale(1.15); } /* מתרחב מעט */
+    100% { transform: scale(1); } /* חוזר למצב רגיל */
+}
+
+.match-anim {
+    animation: matchBounce 0.4s ease-in-out; /*משך זמן 0.4 שניות אנימציית קפיצה קלה */
+}
+
 .match-anim .card-front {
     outline: 3px solid #2ecc71;
     outline-offset: -3px;
-    background-color: #f0fff4 !important;
 }
+
+
+
 
 /* מצב ברירת מחדל - מוסתר */
 #success-message.hidden {

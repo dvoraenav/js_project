@@ -148,7 +148,7 @@ function updateBestTime(numCards, time) {
 
     let allMemoryStats = JSON.parse(localStorage.getItem('memoryGameScores')) || {};
 
-   
+  
     let userTimes = allMemoryStats[currentUser] || {};
 
     if (!userTimes[numCards] || time < userTimes[numCards]) {
